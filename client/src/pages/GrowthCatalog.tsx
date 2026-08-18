@@ -102,6 +102,7 @@ export default function GrowthCatalog() {
   };
   const updateQuantity = (id: number, change: number) => setCart((current) => current.flatMap((line) => line.id !== id ? [line] : line.quantity + change < 1 ? [] : [{ ...line, quantity: line.quantity + change }]));
   const retryCatalog = () => { setDataState("loading"); window.setTimeout(() => { setDataState("ready"); setNotice("Catalog recovered. Sample planning data is ready again."); }, 560); };
+  const scrollToCatalog = () => document.getElementById("catalog")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
 
   const detailRecommendations = selectedService ? services.filter((service) => service.category === selectedService.category && service.id !== selectedService.id).slice(0, 2) : [];
 
@@ -141,7 +142,7 @@ export default function GrowthCatalog() {
                 <p className="project-kicker"><span /> ORIGINAL REACT COMMERCE STUDY / SAMPLE PLANNING DATA</p>
                 <h1>Build the path.<br /><em>Keep the signal.</em></h1>
                 <p>A service-discovery and planning interface for Kyle Johnson Digital Marketing. Explore original sample offers, inspect route-based scope, and assemble a working plan without processing a payment.</p>
-                <div className="growth-hero-actions"><a href="#catalog" className="growth-primary-button">Explore catalog <ArrowRight size={16} /></a><button type="button" className="growth-text-button" onClick={() => setCartOpen(true)}>Open planning cart / {cartCount} <ShoppingBag size={15} /></button></div>
+                <div className="growth-hero-actions"><button type="button" className="growth-primary-button" onClick={scrollToCatalog}>Explore catalog <ArrowRight size={16} /></button><button type="button" className="growth-text-button" onClick={() => setCartOpen(true)}>Open planning cart / {cartCount} <ShoppingBag size={15} /></button></div>
               </div>
               <div className="growth-hero-proof"><p>BUILD EVIDENCE</p><strong>06</strong><span>ROUTES / FILTERS / CART / RECOVERY</span><div className="growth-proof-lines"><i /><i /><i /></div></div>
             </section>
